@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <style>
+         body, h1, h2, h3, p, blockquote, ul, li {
+         margin: 0;
+         padding: 0;
+         }
+         body {
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         background-color: #f9f9f9;
+         color: #333;
+         line-height: 1.6;
+         }
+         header {
+         text-align: center;
+         padding: 20px;
+         background-color: #333;
+         color: #fff;
+         }
+		 @media screen and (max-width: 768px) {
+            header {
+                font-size: 18px;
+            }
+        }
+
+        /* Desktop Styles */
+        @media screen and (min-width: 769px) {
+            header {
+                font-size: 20px;
+            }
+        }
+         main {
+         max-width: 800px;
+         margin: 0 auto;
+         padding: 20px;
+         }
+         .quote-container {
+         background-color: #fff;
+         border-radius: 8px;
+         padding: 30px;
+		 position: center;
+         margin-bottom: 30px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+         }
+         .quote-container:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+         }
+         blockquote {
+         font-size: 24px;
+         line-height: 1.6;
+         margin-bottom: 15px;
+         }
+         cite {
+         display: block;
+         font-style: italic;
+         color: #777;
+         }
+         cite1 {
+         display: block;
+         font-style: italic;
+         color: #777;
+         text-align:right;
+         }
+         footer {
+         text-align: center;
+         padding: 10px;
+         background-color: #333;
+         color: #fff;
+         }
+         .button {
+         display: inline-block;
+         padding: 10px 20px;
+         background-color: #333;
+         color: #fff;
+         text-decoration: none;
+         border-radius: 5px;
+         transition: background-color 0.3s ease-in-out;
+         }
+         .button:hover {
+         background-color: #555;
+         }
+         @media screen and (max-width: 600px) {
+         header {
+         font-size: 20px;
+         }
+         .quote-container {
+         padding: 20px;
+         }
+         blockquote {
+         font-size: 18px;
+         }
+         cite {
+         font-size: 14px;
+         }
+         }
+         .copy-button {
+         background-color: #333;
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         margin-right: 100px;
+         padding: 5px 10px;
+         cursor: pointer;
+         transition: background-color 0.3s ease-in-out;
+         }
+         .copy-button:hover {
+         background-color: #555;
+         }
+         .copy-button i {
+         margin-right: 5px;
+         }
+         body.night-mode {
+         background-color: #222;
+         color: #fff;
+         }
+         .quote-container.night-mode {
+         background-color: #333;
+         color: #ddd;
+         box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+         }
+         .switch {
+         position: relative;
+         display: inline-block;
+         width: 50px;
+         height: 24px;
+         margin-left: 10px;
+         }
+         .switch input {
+         opacity: 0;
+         width: 0;
+         height: 0;
+         }
+         .slider {
+         position: absolute;
+         cursor: pointer;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background-color: #ccc;
+         transition: 0.4s;
+         border-radius: 24px;
+         }
+         .slider:before {
+         position: absolute;
+         content: "";
+         height: 16px;
+         width: 16px;
+         left: 4px;
+         bottom: 4px;
+         background-color: white;
+         transition: 0.4s;
+         border-radius: 50%;
+         }
+         input:checked + .slider {
+         background-color: #2b2b2b;
+         }
+         input:focus + .slider {
+         box-shadow: 0 0 1px #2196F3;
+         }
+         input:checked + .slider:before {
+         transform: translateX(26px);
+         }
+         i.fa-sun,
+         i.fa-moon {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         font-size: 16px;
+         color: #fff;
+         transition: opacity 0.3s ease-in-out;
+         }
+         i.fa-moon {
+         right: 10px;
+         opacity: 0;
+         }
+         i.fa-sun {
+         left: 30px;
+         opacity: 1;
+         }
+         body.night-mode i.fa-sun {
+         opacity: 0;
+         }
+         body.night-mode i.fa-moon {
+         opacity: 1;
+         left: 10px;
+         right: auto;
+         }
+      .menu {
+    list-style: none;
+    display: flex;
+    height: 50%;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    padding: 0;
+    margin: 5px 0;
+    overflow-y: auto; /* Make the menu scrollable */
+    margin-bottom: 2px; /* Set margin on the bottom to 2px */
+    justify-content: center; /* Center the content vertically */
+}
+
+@media (max-height: 480px) {
+    .menu {
+        flex-direction: row;
+        height: 20%;
+		position: relative;
+        margin-top: 10%;
+        margin-bottom: -30px; /* Adjust the margin on the bottom */
+        flex-wrap: wrap; /* Adjust the top position for shorter screens */
+        justify-content: flex-start; /* Reset justify-content for shorter screens */
+    }
+}
+
+         .menu li {
+         margin-bottom: 10px;
+         }
+         .menu a {
+         text-decoration: none;
+         color: #fff;
+         font-weight: bold;
+         display: block;
+         align-items: center;
+         transition: color 0.3s ease-in-out;
+         }
+         .menu a:hover {
+         color: #555;
+         }
+         .menu a i {
+         margin-right: 10px;
+         }
+         @keyframes blink {
+         0%, 100% {
+         opacity: 1;
+         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+         }
+         50% {
+         opacity: 0.5;
+         box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+         }
+         }
+         .menu a.menu-item.active i {
+         animation: blink 1.5s infinite;
+         display: inline-block;
+         }
+         @keyframes blink1 {
+         0%, 100% {
+         opacity: 1;
+         }
+         50% {
+         opacity: 0.5;
+         }
+         }
+         .menu a.menu-item.active {
+         animation: blink1 1.5s infinite;
+         color: #fff;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu1-item.active {
+         animation: blink1 1.5s infinite;
+         color: #fff;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu-item.active:hover {
+         animation-play-state: paused;
+         color: #555;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu-item.active:hover::before {
+         animation: none; 
+         }
+         .snip1198 {
+         font-family: 'Raleway', Arial, sans-serif;
+         text-align: left;
+         font-weight: 400;
+         letter-spacing: 1px;
+         }
+         .snip1198 * {
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         -webkit-transition: all 0.35s ease;
+         transition: all 0.35s ease;
+         }
+         .snip1198 li {
+         display: inline-block;
+         list-style: outside none none;
+         margin: 0.4em 0.8em;
+         padding: 0;
+         }
+         .snip1198 a {
+         padding: 0 0.7em;
+         color: rgba(255, 255, 255, 0.5);
+         position: relative;
+         text-decoration: none;
+         display: inline-block;
+         }
+         .snip1198 a:before {
+         position: absolute;
+         content: '';
+         -webkit-transition: all 0.35s ease;
+         transition: all 0.35s ease;
+         opacity: 0;
+         left: 15%;
+         right: 15%;
+         top: 0;
+         bottom: 0;
+         border-left: 3px solid #ffffff; 
+         border-right: 3px solid #ffffff; 
+         }
+         .snip1198 a:hover,
+         .snip1198 .current a {
+         color: #ffffff;
+         }
+         .snip1198 a:hover:before,
+         .snip1198 .current a:before {
+         opacity: 1;
+         left: 0;
+         right: 0;
+         }
+         .menu a.menu-item.active {
+         border-left: 4px solid #fff; 
+         padding-left: 12px; 
+         color: #fff; 
+         font-weight: bold;
+         position: relative;
+         }
+ .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: #333;
+  color: #fff;
+  text-align:center;
+}
+
+      </style>
+      <title>Your Quotes</title>
+   </head>
+   <body class="night-mode">
+   <center>
+         <header class="header-container">
+            <h2>Welcome to WashidShayar.com
+			<label class="switch">
+            <input type="checkbox" id="nightModeToggle" checked>
+            <span class="slider"></span>
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+         </label>
+		 </h2>
+         </header>
+      </center>
+               <nav>
+               <ul class="menu snip1198">
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\write.html" class="menu1-item active" onclick="setActiveMenuItem(this)"><i class="fas fa-edit"></i><b>Write</b></a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\all.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-globe"></i>All</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\Sher.html" class="menu-item active" onclick="setActiveMenuItem(this)"><i class="fas fa-feather-alt"></i>Sher</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\poem.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-align-left"></i>Poem</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\love.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-heartbeat"></i>Love</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\Zindigi.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-quote-left"></i>Zindagi</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\about.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-info-circle"></i>About</a></li>
+               </ul>
+            </nav>
+         </header>
+      </header>
+      <main>
+      </main>
+      <footer>
+         <p>&copy; 2023 WashidShayar. All rights reserved.</p>
+      </footer>
+      <script type="module">
+	  
+			   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+               import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+               import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+               import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+			   
+         function setActiveMenuItem(item) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(menuItem => menuItem.classList.remove('active'));
+            item.classList.add('active');
+         }
+
+                function copyQuote(button) {
+                    const quote = button.parentElement.previousElementSibling.textContent;
+                    const tempTextarea = document.createElement('textarea');
+                    tempTextarea.value = quote;
+                    document.body.appendChild(tempTextarea);
+                    tempTextarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextarea);
+                    button.textContent = 'Copied!';
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                    }, 1500);
+                }
+
+                document.getElementById('nightModeToggle').addEventListener('change', function() {
+                    document.body.classList.toggle('night-mode', this.checked);
+                    const quoteContainers = document.querySelectorAll('.quote-container');
+                    quoteContainers.forEach(container => container.classList.toggle('night-mode', this.checked));
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('night-mode');
+                    const quoteContainers = document.querySelectorAll('.quote-container');
+                    quoteContainers.forEach(container => container.classList.add('night-mode'));
+                });
+
+         const quotes = [
+         {
+         category: "Love",
+         text: "This is the first poem.",
+         author: "Author 1"
+         },
+		{
+		author: "Mirza Ghalib",
+		category: "Love",
+		text: "Dil hi toh hai na sang-o-khisht, dard se bhar na aaye kyun, royein ge hum hazaar baar, ko khud pe hansa na aaye kyun.",
+		},
+		];
+
+
+         function displayQuotes(quotesArray) {
+         const main = document.querySelector("main");
+
+         quotesArray.forEach(quote => {
+         const quoteContainer = document.createElement("section");
+         quoteContainer.classList.add("quote-container");
+
+         const categoryDiv = document.createElement("cite1");
+         categoryDiv.classList.add("quote-category");
+         categoryDiv.textContent = `${quote.category}`;
+
+         const quoteText = quote.text.split(',').map(part => part.trim()); 
+
+         const quoteContent = document.createElement("div"); 
+
+         const paragraph = document.createElement("blockquote");
+
+         paragraph.innerHTML = quoteText.join(',<br> ');
+
+         paragraph.style.borderLeft = "4px solid #ccc";
+          paragraph.style.paddingLeft = "10px";
+
+         quoteContent.appendChild(paragraph);
+
+         const quoteActions = document.createElement("div");
+         quoteActions.classList.add("quote-actions");
+
+         const cite = document.createElement("cite");
+         cite.textContent = `-${quote.author}`;
+
+         const copyButton = document.createElement("button");
+         copyButton.classList.add("copy-button");
+
+         copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy';
+
+         copyButton.addEventListener("click", function() {
+            copyQuote(this, quote.text);
+         });
+
+         quoteActions.appendChild(cite);
+         quoteActions.appendChild(copyButton);
+
+         quoteContainer.appendChild(categoryDiv); 
+         quoteContainer.appendChild(quoteContent); 
+         quoteContainer.appendChild(quoteActions);
+
+         main.appendChild(quoteContainer);
+         });
+         }
+
+         displayQuotes(quotes);
+		 
+		 const firebaseConfig = {
+               apiKey: "AIzaSyD8y4csLT2yHEwDnSHEf7cAPlgE2uXSLd8",
+               authDomain: "washidshayar.firebaseapp.com",
+               projectId: "washidshayar",
+               storageBucket: "washidshayar.appspot.com",
+               messagingSenderId: "371659852680",
+               appId: "1:371659852680:web:3c782346e9aca3b6ee083d",
+               measurementId: "G-00ZBHKBHHF"
+               };
+			   const app = initializeApp(firebaseConfig);
+               const analytics = getAnalytics(app);
+               const database = getDatabase(app);
+               const auth = getAuth();
+			   
+			   
+			   const textsRef = ref(database, "Shayri");
+
+
+onValue(textsRef, (snapshot) => {
+    const data = snapshot.val();
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const newData = data[key];
+           if (newData.category === "Sher") {
+                displayData(newData);
+            }
+        }
+    }
+}, {
+    onlyOnce: false
+});
+
+const main = document.querySelector("main");
+	
+function displayData(newData) {
+const quoteContainer = document.createElement("section");
+    quoteContainer.classList.add("quote-container", "night-mode"); // Add "night-mode" class here
+
+
+	const category = document.createElement("cite1");
+    category.classList.add("quote-category");
+    category.textContent = `${newData.category}`;
+	
+const newDataText = newData.text;
+
+  const quoteContent = document.createElement("div");
+
+  const paragraph = document.createElement("blockquote");
+
+  paragraph.innerHTML = newDataText.replace(/,+/g, match => {
+    const commaCount = match.length;
+    return (commaCount === 1 ? ',' : ',') + '<br>'.repeat(commaCount === 1 ? 1 : 2);
+  });
+
+  paragraph.style.borderLeft = "4px solid #ccc";
+  paragraph.style.paddingLeft = "10px";
+
+  quoteContainer.style.position = "relative";
+  category.style.position = "absolute";
+  category.style.top = "25px";
+  category.style.right = "10px";
+
+  quoteContainer.appendChild(paragraph);
+
+
+    const quoteActions = document.createElement("div");
+    quoteActions.classList.add("quote-actions");
+
+    const cite = document.createElement("cite");
+    cite.textContent = `-${newData.name}`;
+
+    const copyButton = document.createElement("button");
+    copyButton.classList.add("copy-button");
+
+    copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy';
+
+    copyButton.addEventListener("click", function () {
+        copyQuote(this, paragraph.innerHTML);
+    });
+	
+    quoteActions.appendChild(cite);
+    quoteActions.appendChild(copyButton);
+	quoteContainer.appendChild(category);
+    quoteContainer.appendChild(quoteContent);
+    quoteContainer.appendChild(quoteActions);
+
+    main.appendChild(quoteContainer);
+}	 
+		 
+      </script>
+   </body>
+</html>

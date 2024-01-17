@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>WashidShayar Write</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <style>
+         body {
+         font-family: Arial, sans-serif;
+         background-color: #333;
+         margin: 5px;
+         padding: 5px;
+         margin-top:10px;
+         margin-bottom:20px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         }
+         .container {
+         background-color: none;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+         width: 550px;
+         height:90%;
+         justify-content: center; 
+         }
+         #top-image {
+         position: absolute;
+         top: 20px;
+         left: 20px;
+         width: 100px;
+         height: 100px;
+         border-radius: 50%;
+         background-color: white;
+         overflow: hidden;
+         box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+         }
+         #top-image img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         }
+         #image-and-title {
+         display: flex;
+         align-items: center;
+         margin-bottom: 20px;
+         }
+         #image-and-title img {
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         margin-right: 10px;
+         box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+         }
+         #image-and-title h2 {
+         color: #ccc;
+         margin: 0;
+         }
+         h2 {
+         text-align: center;
+         color: #ccc;
+         }
+         label {
+         display: block;
+         font-weight: bold;
+         margin-bottom: 5px;
+         color: #ccc;
+         }
+         input[type="text"],
+         input[type="email"],
+         select,
+         textarea {
+         width: 95%;
+         padding: 10px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         background-color: #232324;
+         box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
+         color: #fff;
+         }
+         select option {
+         background-color: #232324;
+         color: #fff;
+         height: 40px; 
+         }
+         textarea {
+         resize: vertical;
+         border:none;
+         box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+         }
+         button[type="submit"],
+         button[type="button"] {
+         padding: 10px 20px;
+         background-color: #007bff;
+         border: none;
+         color: #fff;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s ease-in-out;
+         }
+         button[type="submit"]:hover,
+         button[type="button"]:hover {
+         background-color: #0056b3;
+         }
+         #message {
+         text-align: center;
+         margin-top: 10px;
+         font-weight: bold;
+         color: #ccc;
+         }
+         #select-category{
+         margin-right:20px;
+         }
+         #textarea-userinput::-webkit-scrollbar {
+         width: 5px;
+         }
+         #textarea-userinput::-webkit-scrollbar-thumb {
+         background-color: #888;
+         border-radius: 5px;
+         }
+         #textarea-userinput::-webkit-scrollbar-thumb:hover {
+         background-color: #555;
+         }
+         #textarea-userinput::placeholder {
+         color: #9e9b9b;
+         opacity:1;
+         font-family:sans-serif;
+         font-size:15px;
+         }
+         body.night-mode {
+         background-color: #121212;
+         color: #ccc;
+         }
+         body.light-theme {
+         background-color: #f5f5f5;
+         color: #333;
+         }
+         #themeToggle {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         background-color: transparent;
+         border: none;
+         color: #fff;
+         cursor: pointer;
+         font-size: 14px;
+         }
+         body.light-theme input[type="text"],
+         body.light-theme input[type="email"],
+         body.light-theme select,
+         body.light-theme textarea {
+         border: 1px solid #ccc;
+         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+         background-color: #fff;
+         color: #333;
+         }
+         body.light-theme .container {
+         background-color: #f0f0f0;
+         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+         }
+         body.light-theme label {
+         color: black;
+         }
+         body.light-theme #image-and-title h2 {
+         color: black;
+         }
+         .toggle-button {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         background-color: transparent;
+         border: none;
+         color: #fff;
+         cursor: pointer;
+         font-size: 14px;
+         }
+         .toggle-icon {
+         position: relative;
+         width: 40px;
+         height: 20px;
+         display: inline-block;
+         border-radius: 20px;
+         background-color: #ccc;
+         transition: background-color 0.4s, transform 0.4s;
+         overflow: hidden; 
+         }
+         .toggle-icon i {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         font-size: 16px;
+         transition: opacity 0.3s, transform 0.3s;
+         }
+         .toggle-icon .fa-moon {
+         left: 4px;
+         opacity: 1;
+         }
+         .toggle-icon .fa-sun {
+         right: 4px;
+         opacity: 0;
+         }
+         .toggle-button.active .toggle-icon {
+         background-color: #2196F3;
+         }
+         .toggle-button.active .fa-moon {
+         opacity: 0;
+         transform: translateX(-100%);
+         }
+         .toggle-button.active .fa-sun {
+         opacity: 1;
+         transform: translatey(-9px); 
+         }
+         body.light-theme select,
+         body.light-theme select option {
+         border: 1px solid #ccc;
+         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+         background-color: #fff;
+         color: #333;
+         }
+         .menu {
+         list-style: none;
+         display: flex;
+         height:50%;
+         flex-direction: column;
+         position: fixed;
+         left: 0;
+         top: 50%;
+         margin-top:5px;
+         margin-bottom:40PX;
+         transform: translateY(-50%);
+         background-color: #333;
+         padding: 0px;
+         }
+         .menu li {
+         margin-bottom: 10px;
+         }
+         .menu a {
+         text-decoration: none;
+         color: #fff;
+         font-weight: bold;
+         display: flex;
+         align-items: center;
+         transition: color 0.3s ease-in-out;
+         }
+         .menu a:hover {
+         color: #555;
+         }
+         .menu a i {
+         margin-right: 10px;
+         }
+         @keyframes blink {
+         0%, 100% {
+         opacity: 1;
+         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+         }
+         50% {
+         opacity: 0.5;
+         box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+         }
+         }
+         .menu a.menu-item.active i {
+         animation: blink 1.5s infinite;
+         display: inline-block;
+         }
+         @keyframes blink1 {
+         0%, 100% {
+         opacity: 1;
+         }
+         50% {
+         opacity: 0.5;
+         }
+         }
+         .menu a.menu-item.active {
+         animation: blink1 1.5s infinite;
+         color: #fff;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu1-item.active {
+         animation: blink1 1.5s infinite;
+         color: #fff;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu-item.active:hover {
+         animation-play-state: paused;
+         color: #555;
+         font-weight: bold;
+         position: relative;
+         }
+         .menu a.menu-item.active:hover::before {
+         animation: none; 
+         }
+         .menu a.menu-item.active:hover::before {
+         opacity: 1;
+         left: 0;
+         right: 0;
+         }
+         .snip1198 {
+         font-family: 'Raleway', Arial, sans-serif;
+         text-align: left;
+         font-weight: 400;
+         letter-spacing: 1px;
+         }
+         .snip1198 * {
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         -webkit-transition: all 0.35s ease;
+         transition: all 0.35s ease;
+         }
+         .snip1198 li {
+         display: inline-block;
+         list-style: outside none none;
+         margin: 0.4em 0.8em;
+         padding: 0;
+         }
+         .snip1198 a {
+         padding: 0 0.7em;
+         color: rgba(255, 255, 255, 0.5);
+         position: relative;
+         text-decoration: none;
+         display: inline-block;
+         }
+         .snip1198 a:before {
+         position: absolute;
+         content: '';
+         -webkit-transition: all 0.35s ease;
+         transition: all 0.35s ease;
+         opacity: 0;
+         left: 15%;
+         right: 15%;
+         top: 0;
+         bottom: 0;
+         border-left: 3px solid #ffffff; 
+         border-right: 3px solid #ffffff; 
+         }
+         .snip1198 a:hover,
+         .snip1198 .current a {
+         color: #ffffff;
+         }
+         .snip1198 a:hover:before,
+         .snip1198 .current a:before {
+         opacity: 1;
+         left: 0;
+         right: 0;
+         }
+         .menu a.menu-item.active {
+         border-left: 4px solid #fff; 
+         padding-left: 12px; 
+         color: #fff; 
+         font-weight: bold;
+         position: relative;
+         }
+         footer {
+         text-align: center;
+         padding: 10px;
+         background-color: #333;
+         color: #fff;
+         }
+      </style>
+   </head>
+   <body>
+      <button id="themeToggle" class="toggle-button">
+         <div class="toggle-icon">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+         </div>
+      </button>
+      <header>
+         <div id="top-image">
+            <img src="https://i.ibb.co/TYkbPJr/R.jpg" alt="Profile Image">
+         </div>
+         <header>
+            <nav>
+               <ul class="menu snip1198">
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\write.html" class = "menu-item active" class="menu1-item active" onclick="setActiveMenuItem(this)"><i class="fas fa-edit"></i><b>Write</b></a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\all.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-globe"></i>All</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\Sher.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-feather-alt"></i>Sher</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\poem.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-align-left"></i>Poem</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\love.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-heartbeat"></i>Love</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\Zindigi.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-quote-left"></i>Zindagi</a></li>
+                  <li><a href="file:///C:\Users\ghazi\OneDrive\Desktop\html projects\WashidShayar\about.html" class="menu-item" onclick="setActiveMenuItem(this)"><i class="fas fa-info-circle"></i>About</a></li>
+               </ul>
+            </nav>
+         </header>
+      </header>
+      <div class="container">
+         <div id="image-and-title">
+            <img src="https://i.ibb.co/TYkbPJr/R.jpg">
+            <h2 style="font-family: sans-serif;">WriteYour Words</h2>
+         </div>
+         <form id="textForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name here"required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your gmail here"required>
+            <label for="category1">Type:</label>
+            <select type ="text" id="category" required>
+            <option value="" disabled selected>Select a category</option>
+			<option value="Love">Love</option>
+			<option value="Sher">Sher</option>
+			<option value="Ghazal">Ghazal</option>
+			<option value="Sufi">Sufi</option>
+			<option value="Poem">Poem</option>
+			<option value="Zindigi">Sad</option>
+			<option value="Zindigi">Zindigi</option>
+			<option value="Broken">Broken</option>
+			<option value="Friendship">Friendship</option>
+			<option value="Motivational">Motivational</option>
+			<option value="Funny">Funny</option>
+			<option value="Social-issues">Social Issues</option>
+			<option value="Nature">Nature</option>
+			<option value="Life">Life</option>
+			<option value="Emotional">Emotional</option>
+			<option value="Celebratory">Celebratory</option>
+			</select>
+
+            <label for="textInput">Text (max 5000 words):</label>
+            <textarea id="textarea-userinput" style ="font-family:sans-serif" rows="10" placeholder="Show your feelings here..." maxlength="5000" required></textarea>
+            <button type="submit">Submit</button>
+            <button type="button" id="clearButton">Clear</button>
+         </form>
+         <p id="message"></p>
+         <footer>
+            <p>&copy; 2023 WashidShayar. All rights reserved.</p>
+         </footer>
+      </div>
+      <script type="module">
+         function setActiveMenuItem(item) {
+          const menuItems = document.querySelectorAll('.menu-item');
+          menuItems.forEach(menuItem => menuItem.classList.remove('active'));
+          item.classList.add('active');
+         }
+         document.getElementById("themeToggle").addEventListener("click", function () {
+          this.classList.toggle("active");
+          document.body.classList.toggle("light-theme");
+         });
+         
+               import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+               import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+               import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+               import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+         
+               const firebaseConfig = {
+               apiKey: "AIzaSyD8y4csLT2yHEwDnSHEf7cAPlgE2uXSLd8",
+               authDomain: "washidshayar.firebaseapp.com",
+               projectId: "washidshayar",
+               storageBucket: "washidshayar.appspot.com",
+               messagingSenderId: "371659852680",
+               appId: "1:371659852680:web:3c782346e9aca3b6ee083d",
+               measurementId: "G-00ZBHKBHHF"
+               };
+         
+               const app = initializeApp(firebaseConfig);
+               const analytics = getAnalytics(app);
+               const database = getDatabase(app);
+               const auth = getAuth();
+         
+               const textForm = document.getElementById("textForm");
+               const clearButton = document.getElementById("clearButton");
+               const messageElement = document.getElementById("message");
+         
+               textForm.addEventListener("submit", async function (event) {
+               event.preventDefault();
+         
+               try {
+               await signInAnonymously(auth);
+               } catch (error) {
+               console.error("Error signing in:", error);
+               return;
+               }
+         
+               const name = document.getElementById("name").value;
+               const email = document.getElementById("email").value;
+			   const category = document.getElementById("category").value;
+               const text = document.getElementById("textarea-userinput").value;
+         
+               try {
+               const textsRef = ref(database, "Shayri");
+               await push(textsRef, {
+                   name: name,
+                   email: email,
+				   category: category,
+                   text: text,
+               });
+         
+               messageElement.textContent = "Your writing is stored. We will publish it soon!";
+               messageElement.style.color = "green";
+               } catch (error) {
+               console.error("Error storing text:", error);
+               messageElement.textContent = "Error storing text. Please try again later.";
+               messageElement.style.color = "red";
+               }
+               });
+         
+               clearButton.addEventListener("click", function () {
+               document.getElementById("name").value = "";
+               document.getElementById("email").value = "";		 
+               document.getElementById("category").value = "";
+               document.getElementById("textInput").value = "";
+               messageElement.textContent = "";
+               });
+            
+      </script>
+   </body>
+</html>
